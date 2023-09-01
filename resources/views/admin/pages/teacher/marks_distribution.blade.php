@@ -12,9 +12,8 @@
         </div>
     </div>
     <h1 class="h3 mb-3 mx-3">Marks Distribution</h1>
-
     <div class="card-header">
-        Marks Distribution
+        Marks Distribution <a class="btn btn-info mx-2" href="{{ url('teacher/assign-marks') }}">Assign Marks</a>
     </div>
 
     <div class="card-body">
@@ -43,7 +42,7 @@
             </div>
             <div class="mb-3">
                 <div class="col-8">
-                    <table id="teacherassign" class="table table-striped table-bordered" style="width:100%;">
+                    <table id="teacherassign" class="table table-striped table-bordered m-3" style="width:100%;">
                         <thead>
                             <tr>
                                 <th>Category Name</th>
@@ -56,7 +55,7 @@
                     </table>
                 </div>
             </div>
-            <div class="mb-3">
+            <div class="mb-3 mx-3">
                 <button type="submit" name="submit" id="button" class="btn btn-primary">Assign</button>
             </div>
         </form>
@@ -104,9 +103,10 @@
                         '</tr>';
                     $('#dynamic').append(html);
                     $('#teacherassign').show();
+                    $('#button').show();
                 } else {
                     $('#teacherassign').hide();
-                    $('#button').hide();
+                    $('#button').show();
                 }
             });
             $(document).on('click', '.add_btn', function() {
@@ -135,12 +135,12 @@
                     $('#button').show();
                     $('.add_btn').hide();
                 } else {
-                    $('#button').hide();
+                    $('#button').show();
                     $('.add_btn').show();
                 }
             }
             $('form').on('submit', function(event) {
-              
+
                 // Calculate the sum of marks
                 var sum = 0;
                 $("input[name='marks[]']").each(function() {
@@ -148,7 +148,7 @@
                 });
 
                 if (sum !== 100) {
-                   
+
                     event.preventDefault(); // Prevent form submission
 
                 } else {

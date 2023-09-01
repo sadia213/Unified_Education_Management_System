@@ -11,7 +11,7 @@
 
             <form action="{{ url('student/enroll/post') }}" method="POST">
                 @csrf
-                <div class="mb-3">
+                <div class="my-3">
                     <label for="inputBrandTitle" class="col-sm-3 col-form-label mx-3">Session</label>
                     <div class="col-8">
                         <select name="session" id="session" class="form-control mx-3">
@@ -26,8 +26,8 @@
                     </div>
                 </div>
 
-                <div class="table-responsive" id="course" name="course">
-                    <table class="table text-center">
+                <div class="table-responsive m-3" id="course" name="course">
+                    <table class="table text-center ">
                         <thead>
                             <tr>
                                 <th scope="col">Select</th>
@@ -93,24 +93,9 @@
                 });
             });
 
-            $("form").submit(function(event) {
-                event.preventDefault(); // Prevent the default form submission
-
-                var formData = $(this).serialize(); // Serialize the form data
-
-                $.ajax({
-                    url: 'http://127.0.0.1:8000/student/enroll/post',
-                    type: 'POST',
-                    data: formData,
-                    success: function(res) {
-                        // Handle the success response, e.g., show a success message
-                        alert("Enrollment successful!");
-                    },
-                    error: function(xhr) {
-                        // Handle the error response, e.g., show an error message
-                        alert("Enrollment failed. Please try again.");
-                    }
-                });
+            $("form").submit(function() {
+                // This code will be executed when the form is submitted
+                // No need for AJAX here, the form will be submitted traditionally
             });
         });
     </script>

@@ -45,11 +45,7 @@
                                     <button type="submit" class="btn btn-danger btn-sm mx-1" onclick="return confirm('Are you sure, you want to delete this?')" style="font-size: 11px">
                                         <i class=" fa fa-trash "></i>
                                     </button>
-                                    @if($session->status == 1)
-                                    <a href="{{ route('session.inactive', $session->id) }}" title="active"><i class="fa-solid fa-circle-check"></i></a>
-                                    @else
-                                    <a href="{{ route('session.active', $session->id) }}" title="inactive"><i class="fa-solid fa-circle-xmark"></i></a>
-                                    @endif
+                                   
                                 </form>
                             </td>
                         </tr>

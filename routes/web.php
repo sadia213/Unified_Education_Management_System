@@ -92,7 +92,7 @@ Route::middleware(['checkLogin'])->group(function () {
     });
     Route::middleware(['checkIfStudent'])->group(function () {
         Route::get('student/enroll/create', [StudentController::class, 'enroll']);
-        Route::post('student/enroll/store', [StudentController::class, 'enrollStore']);
+        Route::get('student/enroll/index', [StudentController::class, 'enrollIndex']);
         Route::post('student/enroll/post', [StudentController::class, 'postEnroll']);
         
         Route::get('student/project/index', [ProjectController::class, 'index']);
@@ -106,6 +106,8 @@ Route::middleware(['checkLogin'])->group(function () {
         Route::post('teacher/marks-distribute', [CourseController::class, 'marksDistribution']);
         
         Route::get('teacher/distributed-course/{id}', [CourseController::class, 'distributedCourse']);
+
+        Route::get('teacher/assign-marks', [CourseController::class, 'assignMarks']);
         
     });
 });

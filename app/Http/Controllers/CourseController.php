@@ -10,6 +10,7 @@ use App\Models\AddSession;
 use App\Models\Session;
 use Illuminate\Support\Facades\DB;
 use App\Models\MarksDistribution;
+use App\Models\Enrollment;
 
 class CourseController extends Controller
 {
@@ -183,5 +184,44 @@ class CourseController extends Controller
         return response()->json([
             'distributed_courses' => $courses
         ]);
+    }
+    public function assignMarks()
+    {
+        $userDepartmentId = session('user_department_id');
+
+        $sessions = Session::with(['course', 'add_session'])
+            ->whereHas('course', function ($query) use ($userDepartmentId) {
+                $query->where('department_id', $userDepartmentId);
+            })
+            ->get();
+
+        $add_sessions = AddSession::where('status', 1)->get(['id', 'session']);
+
+        $courses = Course::where('department_id', session('user_department_id'))
+            ->latest()
+            ->get();
+
+        // Retrieve students' information for the selected course
+        $enrollments = []; // Initialize an array to store student information
+        $selectedCourseId = request()->input('course'); // Get the selected course ID from the request
+        if ($selectedCourseId) {
+            $enrollments = Enrollment::where('course_id', $selectedCourseId)
+                ->with('user') // Assuming you have a relationship to the User model
+                ->get();
+        }
+
+        $user_department_id = session('user_department_id');
+
+        return view('admin.pages.teacher.assign_marks', compact('sessions', 'add_sessions', 'courses', 'user_department_id', 'enrollments'));
+    }
+
+
+    public function getCourseEnrollments($courseId)
+    {
+        $enrollments = Enrollment::where('course_id', $courseId)
+            ->with('user') // Assuming you have a relationship to the User model
+            ->get();
+
+        return response()->json(['students' => $enrollments]);
     }
 }

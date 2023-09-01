@@ -14,4 +14,9 @@ class MarksDistribution extends Model
         'category_name',
         'marks',
     ];
+    // Assuming you have a 'course' relationship defined
+    public function course()
+    {
+        return $this->belongsTo(Course::class);
+    }
 }

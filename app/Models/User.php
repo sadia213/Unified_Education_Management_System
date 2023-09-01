@@ -54,7 +54,7 @@ class User extends Authenticatable
     {
         return "{$this->first_name} {$this->last_name}";
     }
-    
+
     public function scopeTeachers($query)
     {
         return $query->where('role', 'teacher');
@@ -64,5 +64,8 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Department::class);
     }
-
+    public function enrollments()
+    {
+        return $this->hasMany(Enrollment::class);
+    }
 }
