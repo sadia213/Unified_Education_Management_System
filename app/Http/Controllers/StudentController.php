@@ -33,8 +33,7 @@ class StudentController extends Controller
     {
         $course = Course::find($id);
         $departments = Department::latest()->get();
-        $pending_users = User::where('status', '=', 0)->get();
-        return view('admin.pages.student.project_submission.edit', compact('course', 'departments', 'pending_users'));
+        return view('admin.pages.student.project_submission.edit', compact('course', 'departments'));
     }
     public function enroll()
     {
@@ -56,21 +55,21 @@ class StudentController extends Controller
     public function enrollIndex()
     {
         $userId = session('user_id'); // Modify this to get the actual user_id
-       
+
         $enrollments = Enrollment::where('enrollments.user_id', $userId)
-        ->join('sessions', 'enrollments.course_id', '=', 'sessions.course_id')
-        ->join('courses', 'sessions.course_id', '=', 'courses.id')
-        ->join('users', 'sessions.user_id', '=', 'users.id') // Assuming the user_id in sessions table refers to the assigned teacher's user_id
-        ->join('add_sessions', 'sessions.add_session_id', '=', 'add_sessions.id')
-        ->select(
-            'add_sessions.session',
-            'courses.course_code',
-            'courses.course_name',
-            'sessions.section',
-            'users.first_name',
-            'users.last_name'
-        )
-        ->get();
+            ->join('sessions', 'enrollments.course_id', '=', 'sessions.course_id')
+            ->join('courses', 'sessions.course_id', '=', 'courses.id')
+            ->join('users', 'sessions.user_id', '=', 'users.id') // Assuming the user_id in sessions table refers to the assigned teacher's user_id
+            ->join('add_sessions', 'sessions.add_session_id', '=', 'add_sessions.id')
+            ->select(
+                'add_sessions.session',
+                'courses.course_code',
+                'courses.course_name',
+                'sessions.section',
+                'users.first_name',
+                'users.last_name'
+            )
+            ->get();
 
         return view('admin.pages.student.enrollment.index', compact('enrollments'));
     }
@@ -84,7 +83,6 @@ class StudentController extends Controller
             ->where('sessions.add_session_id', '=', $add_session_id)
             ->select('courses.*', 'sessions.section')
             ->get();
-
         return response()->json([
             'add_sessions' => $courses
         ]);

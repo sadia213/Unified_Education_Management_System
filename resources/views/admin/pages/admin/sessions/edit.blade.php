@@ -14,10 +14,11 @@
         <div class="mb-3">
             <label for="inputBrandTitle" class="col-sm-3 col-form-label">Session</label>
             <div class="col-8">
-                <select name="session" id="" class="form-control">
-                    <option value="Spring-2023"{{ $session->session == 'Spring-2023' ? "selected" : '' }}>Spring-2023</option>
-                    <option value="Fall-2023"{{ $session->session == 'Fall-2023' ? "selected" : '' }}>Fall-2023</option>
-                    <option value="Spring-2024"{{ $session->session == 'Spring-2024' ? "selected" : '' }}>Spring-2024</option>
+                <select name="add_session_id" id="" class="form-control">
+                    <option value="">Select Session</option>
+                    @foreach ($add_sessions as $s)
+                        <option {{ ($s->id == $session->add_session_id) ? 'selected' : '' }} value="{{ $s->id }}">{{ $s->session }}</option>
+                    @endforeach
                 </select>
                 @error('session')
                 <div class="alert alert-danger">{{$message}}</div>

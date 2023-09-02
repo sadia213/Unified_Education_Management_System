@@ -102,12 +102,14 @@ Route::middleware(['checkLogin'])->group(function () {
     });
     Route::middleware(['checkIfTeacher'])->group(function (){
         Route::get('teacher/running-courses', [CourseController::class, 'runningCourses']);
+
         Route::get('teacher/marks-distribution', [CourseController::class, 'marksDistribute']);
         Route::post('teacher/marks-distribute', [CourseController::class, 'marksDistribution']);
         
         Route::get('teacher/distributed-course/{id}', [CourseController::class, 'distributedCourse']);
 
         Route::get('teacher/assign-marks', [CourseController::class, 'assignMarks']);
+       
         
     });
 });

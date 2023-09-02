@@ -73,7 +73,7 @@ class SessionController extends Controller
             'user_id' => $request->user_id,
             'department_id' => $adminDepartmentId, // Set the department_id to admin's department
         ]);
-        return redirect('admin/assigned_courses/index')->withMessage('Session added successfully.');
+        return redirect('admin/assigned_courses/index')->withMessage('Course Assigned successfully.');
     }
 
     public function show($id)
@@ -128,14 +128,15 @@ class SessionController extends Controller
     {
         $session = Session::find($id);
         $course = Course::find($id);
-
+        $adminDepartmentId = session('user_department_id');
         $session->update([
-            'session' => $request->session,
+            'add_session_id' => $request->add_session_id,
             'section' => $request->section,
             'course_id' => $request->course_id,
             'user_id' => $request->user_id,
+            'department_id' => $adminDepartmentId, // Set the department_id to admin's department
         ]);
-        return redirect('admin/assigned_courses/index')->withMessage('Session updated successfully.');
+        return redirect('admin/assigned_courses/index')->withMessage('Assigned Course updated successfully.');
     }
 
     public function destroy($id)
@@ -149,6 +150,7 @@ class SessionController extends Controller
     {
 
         $add_sessions = AddSession::all();
+        
         $departmentId = session('user_department_id');
 
         // Get the pending users for the user's department

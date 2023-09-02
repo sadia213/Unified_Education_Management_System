@@ -23,3 +23,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::get('users/{id}', [AdminLayoutController::class, 'getTeachers']);
 Route::get('enrollment/{id}', [StudentController::class, 'getEnroll']);
 Route::get('course-enrollments/{courseId}', [CourseController::class,'getCourseEnrollments']);
+Route::post('teacher/assigned-marks', [CourseController::class, 'submitMarks']);

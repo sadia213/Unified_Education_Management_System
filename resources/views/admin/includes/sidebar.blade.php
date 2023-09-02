@@ -70,7 +70,7 @@
                         href="{{ url('/dashboard') }}">
                         <div class="sidebar-brand-icon rotate-n-15 sidebar-brand-text text-center m-3">
                             <i class="fas fa-laugh-wink"></i>
-                            {{ Session::get('user_role') }}
+                            {{ Session::get('user_role') }} of
                             <br>
                             <?= App\Models\Department::find(session('user_department_id'))->dept_name ?>
                         </div>

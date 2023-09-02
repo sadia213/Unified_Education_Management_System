@@ -39,7 +39,7 @@
                             <td>
                                 <a href="{{ url('admin/assigned_courses/show',['session'=>$session->id]) }}"><i class=" fa fa-eye px-1"></i></a>
                                 <a href="{{ url('admin/assigned_courses/edit',['session'=>$session->id]) }}"><i class="fa-regular fa-pen-to-square"></i></a>
-                                <form style="display:inline" action="{{ url('admin/sessions/delete', ['session' => $session->id]) }}">
+                                <form style="display:inline" action="{{ url('admin/assigned_courses/delete', ['session' => $session->id]) }}">
                                     @csrf
 
                                     <button type="submit" class="btn btn-danger btn-sm mx-1" onclick="return confirm('Are you sure, you want to delete this?')" style="font-size: 11px">

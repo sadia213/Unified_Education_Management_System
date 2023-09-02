@@ -32,7 +32,7 @@
         <div class="mb-3">
             <label for="inputTitle" class="col-sm-3 col-form-label">Course Short Name</label>
             <div class="col-8">
-                <input type="text" class="form-control" id="inputTitle" name="short_name" value="">
+                <input type="text" class="form-control" id="inputTitle" name="short_name" value="{{ old('short_name',$course->short_name) }}">
                 @error('short_name')
                 <div class="alert alert-danger">{{$message}}</div>
                 @enderror
